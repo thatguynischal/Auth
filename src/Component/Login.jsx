@@ -1,12 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import http from "../http";
-import useAuth from "../Hooks/useAuth";
+import AuthUser from "../AuthUser";
 
 const LOGIN_URL = "/login";
 
 const Login = () => {
-  const { setAuth } = useAuth();
+  const {http,setToken} = AuthUser();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -30,13 +29,12 @@ const Login = () => {
         email: user,
         password: pwd,
       });
-
-      const data = response?.data;
-      setAuth({ data });
+      const data = response?.data.data;
+      console.log(data);
+      setToken(data.user, data.token);
       setUser("");
       setPwd("");
-      alert("Hello");
-      
+      navigate("/task");
     } catch (err) {
       if (!err.response) {
         setErrMsg("No server response.");

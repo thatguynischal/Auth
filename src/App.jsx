@@ -7,7 +7,6 @@ import Home from "./Component/Home";
 import Unauthorized from "./Component/Unauthorized";
 import Layout from "./Component/Layout";
 import Missing from "./Component/Missing";
-import RequireAuth from "./Component/RequireAuth";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -20,7 +19,7 @@ function App() {
           <Route path="unauthorized" element={<Unauthorized />} />
 
           {/* protected route */}
-          <Route element={<RequireAuth />}>
+          <Route>
             <Route path="/" element={<Home />} />
             <Route path="task" element={<Task />} />
           </Route>
